@@ -58,16 +58,22 @@ export async function PUT(
 }
 
 // function to delete a user
-export function DELETE(
+export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: number } }
+  { params }: { params: { id: string } }
 ) {
   // Fetch user from db
   // If not found, return 404
-  if (params.id > 10)
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+  if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   // Delete the user
   // Return 200
+  await prisma.user.delete({
+    where: { id: user.id },
+  });
   return NextResponse.json({});
   //   above, you can return the deleted obj or an empty obj;
 }
