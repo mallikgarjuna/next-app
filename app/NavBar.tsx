@@ -3,7 +3,7 @@ import React from "react";
 
 const NavBar = () => {
   return (
-    <div className="flex bg-slate-200 p-5">
+    <div className="flex bg-slate-200 p-5 space-x-3">
       <Link href="/" className="mr-5">
         NextJS
       </Link>
@@ -12,6 +12,9 @@ const NavBar = () => {
       </Link>
       <Link href="/admin" className="mr-5">
         Admin
+      </Link>
+      <Link href="/api/auth/signin" className="mr-5">
+        Log in
       </Link>
     </div>
   );
